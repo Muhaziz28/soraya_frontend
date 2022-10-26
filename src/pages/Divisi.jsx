@@ -3,12 +3,12 @@ import Layout from "./Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../features/authSlice";
-import DashboardComponent from "../components/DashboardComponent";
+import DivisiComponent from "../components/DivisiComponent";
 
-const Dashboard = () => {
+const Divisi = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isError } = useSelector((state) => state.auth);
+  const { isError, user } = useSelector((state) => state.auth);
 
   // ? dispatch(getMe()) is called in useEffect() to get the user data
   useEffect(() => {
@@ -20,13 +20,16 @@ const Dashboard = () => {
     if (isError) {
       navigate("/");
     }
-  }, [isError, navigate]);
+    if (user && user.payload.datas.role_id !== 1) {
+      navigate("/dashboard");
+    }
+  }, [isError, user, navigate]);
 
   return (
     <Layout>
-      <DashboardComponent />
+      <DivisiComponent />
     </Layout>
   );
 };
 
-export default Dashboard;
+export default Divisi;

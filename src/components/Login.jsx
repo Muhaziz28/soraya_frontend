@@ -17,7 +17,7 @@ const Login = () => {
       navigate("/dashboard");
     }
     dispatch(reset());
-  }, [user, isSuccess, navigate, dispatch]);
+  }, [user, isSuccess, dispatch, navigate]);
 
   const Auth = (e) => {
     e.preventDefault();
